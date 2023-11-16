@@ -1,8 +1,11 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MainGUI extends JFrame {
+    private ArrayList<Candidato> candidatos = new ArrayList<>();
+
     public MainGUI() {
         super("Bienvenido al Programa");
 
@@ -18,7 +21,7 @@ public class MainGUI extends JFrame {
         menuItemCrearCandidato.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CandidatoGUI candidatoGUI = new CandidatoGUI();
+                CandidatoGUI candidatoGUI = new CandidatoGUI(candidatos);
                 candidatoGUI.setVisible(true);
             }
         });
