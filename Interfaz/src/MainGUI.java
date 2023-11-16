@@ -16,13 +16,22 @@ public class MainGUI extends JFrame {
         menuBar.add(menuInicio);
 
         JMenuItem menuItemCrearCandidato = new JMenuItem("Crear Candidato");
+        JMenuItem menuItemMostrarCandidatos = new JMenuItem("Mostrar Candidatos");
         menuInicio.add(menuItemCrearCandidato);
+        menuInicio.add(menuItemMostrarCandidatos);
 
         menuItemCrearCandidato.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CandidatoGUI candidatoGUI = new CandidatoGUI(candidatos);
                 candidatoGUI.setVisible(true);
+            }
+        });
+
+        menuItemMostrarCandidatos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarCandidatos.mostrarCandidatos(candidatos);
             }
         });
 
