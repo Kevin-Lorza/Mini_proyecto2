@@ -1,14 +1,15 @@
 import javax.swing.*;
+import javax.swing.JPanel;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MainGUI extends JFrame {
+public class MainGUI extends JFrame{
     private ArrayList<Candidato> candidatos = new ArrayList<>();
 
     public MainGUI() {
         super("Bienvenido al Programa");
-
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
@@ -35,9 +36,9 @@ public class MainGUI extends JFrame {
             }
         });
 
+        this.setContentPane(new imagenFondo());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        setSize(400, 200);
+        setSize(800, 500);
         setVisible(true);
     }
 
@@ -49,4 +50,15 @@ public class MainGUI extends JFrame {
             }
         });
     }
+
+    public class imagenFondo extends JPanel{
+        @Override
+        public void paint(Graphics g){
+            ImageIcon imagen = new ImageIcon(getClass().getResource("imagen.jpg"));
+            g.drawImage(imagen.getImage(), 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+    }
+
 }
