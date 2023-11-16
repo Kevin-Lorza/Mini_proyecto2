@@ -15,7 +15,7 @@ public class CandidatoGUI extends JFrame {
         this.candidatos = candidatos;
 
         setTitle("Registro de Candidatos");
-        setSize(400, 300);
+        setSize(500, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
