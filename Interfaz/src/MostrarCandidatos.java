@@ -9,7 +9,7 @@ public class MostrarCandidatos extends JFrame {
         super("Lista de Candidatos");
         this.candidatos = candidatos;
 
-        setSize(500, 300);
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 

@@ -1,15 +1,16 @@
 import javax.swing.*;
-import javax.swing.JPanel;
+
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MainGUI extends JFrame{
+public class MainGUI extends JFrame {
     private ArrayList<Candidato> candidatos = new ArrayList<>();
 
     public MainGUI() {
         super("Bienvenido al Programa");
+
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
@@ -18,8 +19,11 @@ public class MainGUI extends JFrame{
 
         JMenuItem menuItemCrearCandidato = new JMenuItem("Crear Candidato");
         JMenuItem menuItemMostrarCandidatos = new JMenuItem("Mostrar Candidatos");
+        JMenuItem menuItemBuscarCandidato = new JMenuItem("Buscar Candidato");
+
         menuInicio.add(menuItemCrearCandidato);
         menuInicio.add(menuItemMostrarCandidatos);
+        menuInicio.add(menuItemBuscarCandidato);
 
         menuItemCrearCandidato.addActionListener(new ActionListener() {
             @Override
@@ -36,9 +40,18 @@ public class MainGUI extends JFrame{
             }
         });
 
+        menuItemBuscarCandidato.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BuscarCandidato.buscarCandidato(candidatos);
+            }
+        });
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         this.setContentPane(new imagenFondo());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 500);
+        setSize(600, 400);
         setVisible(true);
     }
 
@@ -60,5 +73,4 @@ public class MainGUI extends JFrame{
             super.paint(g);
         }
     }
-
 }
