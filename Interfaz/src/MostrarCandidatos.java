@@ -3,11 +3,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class MostrarCandidatos extends JFrame {
-    private ArrayList<Candidato> candidatos;
 
     public MostrarCandidatos(ArrayList<Candidato> candidatos) {
         super("Lista de Candidatos");
-        this.candidatos = candidatos;
 
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

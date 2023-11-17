@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MainGUI extends JFrame {
-    private ArrayList<Candidato> candidatos = new ArrayList<>();
 
+public class MainGUI extends JFrame {
+    public ArrayList<Candidato> candidatos = new ArrayList<>();
     public MainGUI() {
         super("Bienvenido al Programa");
 
@@ -20,10 +20,12 @@ public class MainGUI extends JFrame {
         JMenuItem menuItemCrearCandidato = new JMenuItem("Crear Candidato");
         JMenuItem menuItemMostrarCandidatos = new JMenuItem("Mostrar Candidatos");
         JMenuItem menuItemBuscarCandidato = new JMenuItem("Buscar Candidato");
+        JMenuItem menuItemActualizarCandidato = new JMenuItem("Actualizar Candidato");
 
         menuInicio.add(menuItemCrearCandidato);
         menuInicio.add(menuItemMostrarCandidatos);
         menuInicio.add(menuItemBuscarCandidato);
+        menuInicio.add(menuItemActualizarCandidato);
 
         menuItemCrearCandidato.addActionListener(new ActionListener() {
             @Override
@@ -44,6 +46,14 @@ public class MainGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BuscarCandidato.buscarCandidato(candidatos);
+            }
+        });
+
+        menuItemActualizarCandidato.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ActualizarCandidato ventanActualizarCandidato = new ActualizarCandidato();
+                ventanActualizarCandidato.setVisible(true);
             }
         });
 
