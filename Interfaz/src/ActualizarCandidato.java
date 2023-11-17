@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ActualizarCandidato extends JFrame {
-    private JTextField cedulaField, nombreField, ciudadField, posicionField, partidoField, propuestasField, votosField;
-
+    private JTextField cedulaField, nombreField, propuestasField, votosField;
+    private JComboBox<String> ciudadComboBox, posicionComboBox, partidoComboBox;
     public ActualizarCandidato(){
        
         setTitle("Actualizar Candidato");
@@ -22,11 +22,19 @@ public class ActualizarCandidato extends JFrame {
         });
 
         nombreField = new JTextField(10);
-        ciudadField = new JTextField(10);
-        posicionField = new JTextField(10);
-        partidoField = new JTextField(10);
+        ciudadComboBox = new JComboBox<>(new String[]{"Cali", "Buenaventura", "Palmira", "Tulua", "Jamundi", "Cartago", "Zarzal", "Candelaria", "Pradera", "Ginebra", "Cerrito", "Roldanillo", "Launion", "Sevilla", "Buga", "Guacari", "Rozo", "Caicedonia", "Yumbo", "Florida", "Dagua"});
+        posicionComboBox = new JComboBox<>(new String[]{"Derecha", "Izquierda"});
         propuestasField = new JTextField(10);
         votosField = new JTextField(10);
+        partidoComboBox = new JComboBox<>();
+
+        posicionComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarPartidos();
+            }
+        });
+
 
         JButton actualizarButton = new JButton("Actualizar");
         actualizarButton.addActionListener(new ActionListener() {
@@ -36,7 +44,7 @@ public class ActualizarCandidato extends JFrame {
             }
         });
 
-        JPanel panelPrincipal = new JPanel(new GridLayout(10, 2));
+        JPanel panelPrincipal = new JPanel(new GridLayout(9, 2));
         panelPrincipal.add(new JLabel("Cédula:"));
         panelPrincipal.add(cedulaField);
         panelPrincipal.add(new JLabel(""));
@@ -44,11 +52,11 @@ public class ActualizarCandidato extends JFrame {
         panelPrincipal.add(new JLabel("Nombre:"));
         panelPrincipal.add(nombreField);
         panelPrincipal.add(new JLabel("Ciudad:"));
-        panelPrincipal.add(ciudadField);
+        panelPrincipal.add(ciudadComboBox);
         panelPrincipal.add(new JLabel("Posición:"));
-        panelPrincipal.add(posicionField);
+        panelPrincipal.add(posicionComboBox);
         panelPrincipal.add(new JLabel("Partido:"));
-        panelPrincipal.add(partidoField);
+        panelPrincipal.add(partidoComboBox);
         panelPrincipal.add(new JLabel("Propuestas:"));
         panelPrincipal.add(propuestasField);
         panelPrincipal.add(new JLabel("Votos:"));
@@ -61,22 +69,33 @@ public class ActualizarCandidato extends JFrame {
         setVisible(true);
     }
     
+    private void actualizarPartidos() {
+        partidoComboBox.removeAllItems();
+        if (posicionComboBox.getSelectedItem().equals("Derecha")) {
+            partidoComboBox.addItem("Centro Democrático");
+            partidoComboBox.addItem("Conservador");
+            partidoComboBox.addItem("Cambio Radical");
+        } else {
+            partidoComboBox.addItem("Liberal");
+            partidoComboBox.addItem("Alianza Verde");
+        }
+    }
+
     private void buscarCandidato() {
         String cedulaBuscada;
         cedulaBuscada = cedulaField.getText();
         CandidatoGUI.candidatos.forEach( i ->{
             if (i.getCedula().equals(cedulaBuscada)) {
                 nombreField.setText(i.getNombre());
-                ciudadField.setText(i.getCiudad());
-                posicionField.setText(i.getPosicion());
-                partidoField.setText(i.getPartido());
+                ciudadComboBox.getSelectedItem();
+                posicionComboBox.getSelectedItem();
+                partidoComboBox.getSelectedItem();
                 propuestasField.setText(i.getPropuestas());
                 votosField.setText(String.valueOf(i.getVotos()));
                 return;  
             }
         });
 
-        JOptionPane.showMessageDialog(this, "Candidato no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public void actualizarCandidato() {
@@ -85,9 +104,9 @@ public class ActualizarCandidato extends JFrame {
             if (i.getCedula().equals(cedulaBuscada)) {
       
                 i.setNombre(nombreField.getText());
-                i.setCiudad(ciudadField.getText());
-                i.setPosicion(posicionField.getText()); 
-                i.setPartido(partidoField.getText());
+                i.setCiudad((String)ciudadComboBox.getSelectedItem());
+                i.setPosicion((String)posicionComboBox.getSelectedItem()); 
+                i.setPartido((String)partidoComboBox.getSelectedItem());
                 i.setPropuestas(propuestasField.getText());
                 try {
                     i.setVotos(Integer.parseInt(votosField.getText()));
@@ -96,6 +115,7 @@ public class ActualizarCandidato extends JFrame {
                     JOptionPane.showMessageDialog(this, "Ingrese un valor válido para votos", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                JOptionPane.showMessageDialog(this, "Candidato actualizado correctamente", "Error", JOptionPane.INFORMATION_MESSAGE);
             }    
 
             });
