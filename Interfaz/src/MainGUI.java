@@ -1,19 +1,19 @@
 import javax.swing.*;
-
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-
 public class MainGUI extends JFrame {
     public ArrayList<Candidato> candidatos = new ArrayList<>();
+
     public MainGUI() {
         super("Bienvenido al Programa");
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
+        // Menú Inicio
         JMenu menuInicio = new JMenu("Inicio");
         menuBar.add(menuInicio);
 
@@ -26,6 +26,13 @@ public class MainGUI extends JFrame {
         menuInicio.add(menuItemMostrarCandidatos);
         menuInicio.add(menuItemBuscarCandidato);
         menuInicio.add(menuItemActualizarCandidato);
+
+        // Menú Estadísticas
+        JMenu menuEstadisticas = new JMenu("Estadísticas");
+        menuBar.add(menuEstadisticas);
+
+        JMenuItem menuItemVerGanador = new JMenuItem("Ver Candidato Ganador");
+        menuEstadisticas.add(menuItemVerGanador);
 
         menuItemCrearCandidato.addActionListener(new ActionListener() {
             @Override
@@ -52,8 +59,18 @@ public class MainGUI extends JFrame {
         menuItemActualizarCandidato.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ActualizarCandidato ventanActualizarCandidato = new ActualizarCandidato();
-                ventanActualizarCandidato.setVisible(true);
+                ActualizarCandidato ventanaActualizarCandidato = new ActualizarCandidato();
+                ventanaActualizarCandidato.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                ventanaActualizarCandidato.setVisible(true);
+            }
+        });
+
+        menuItemVerGanador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                VerCandidatoGanador ventanaGanador = new VerCandidatoGanador();
+                ventanaGanador.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                ventanaGanador.setVisible(true);
             }
         });
 
@@ -65,6 +82,8 @@ public class MainGUI extends JFrame {
         setVisible(true);
     }
 
+
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -74,9 +93,9 @@ public class MainGUI extends JFrame {
         });
     }
 
-    public class imagenFondo extends JPanel{
+    public class imagenFondo extends JPanel {
         @Override
-        public void paint(Graphics g){
+        public void paint(Graphics g) {
             ImageIcon imagen = new ImageIcon(getClass().getResource("imagen.jpg"));
             g.drawImage(imagen.getImage(), 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
