@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -17,8 +19,11 @@ public class MainGUI extends JFrame {
 
         JMenuItem menuItemCrearCandidato = new JMenuItem("Crear Candidato");
         JMenuItem menuItemMostrarCandidatos = new JMenuItem("Mostrar Candidatos");
+        JMenuItem menuItemBuscarCandidato = new JMenuItem("Buscar Candidato");
+
         menuInicio.add(menuItemCrearCandidato);
         menuInicio.add(menuItemMostrarCandidatos);
+        menuInicio.add(menuItemBuscarCandidato);
 
         menuItemCrearCandidato.addActionListener(new ActionListener() {
             @Override
@@ -35,9 +40,18 @@ public class MainGUI extends JFrame {
             }
         });
 
+        menuItemBuscarCandidato.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BuscarCandidato.buscarCandidato(candidatos);
+            }
+        });
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        setSize(400, 200);
+        this.setContentPane(new imagenFondo());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(600, 400);
         setVisible(true);
     }
 
@@ -48,5 +62,15 @@ public class MainGUI extends JFrame {
                 new MainGUI();
             }
         });
+    }
+
+    public class imagenFondo extends JPanel{
+        @Override
+        public void paint(Graphics g){
+            ImageIcon imagen = new ImageIcon(getClass().getResource("imagen.jpg"));
+            g.drawImage(imagen.getImage(), 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
     }
 }

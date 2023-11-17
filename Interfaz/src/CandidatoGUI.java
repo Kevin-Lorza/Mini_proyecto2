@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class CandidatoGUI extends JFrame {
     private JTextField nombreField, cedulaField, votosField, propuestasField;
     private JComboBox<String> ciudadComboBox, posicionComboBox, partidoComboBox;
-    private ArrayList<Candidato> candidatos;
+    public static ArrayList<Candidato> candidatos;
 
     public CandidatoGUI(ArrayList<Candidato> candidatos) {
         
