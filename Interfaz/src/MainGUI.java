@@ -13,7 +13,6 @@ public class MainGUI extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
-        // Menú Inicio
         JMenu menuInicio = new JMenu("Inicio");
         menuBar.add(menuInicio);
 
@@ -21,13 +20,15 @@ public class MainGUI extends JFrame {
         JMenuItem menuItemMostrarCandidatos = new JMenuItem("Mostrar Candidatos");
         JMenuItem menuItemBuscarCandidato = new JMenuItem("Buscar Candidato");
         JMenuItem menuItemActualizarCandidato = new JMenuItem("Actualizar Candidato");
+        JMenuItem menuItemEliminarCandidato = new JMenuItem("Eliminar Candidato");
 
         menuInicio.add(menuItemCrearCandidato);
         menuInicio.add(menuItemMostrarCandidatos);
         menuInicio.add(menuItemBuscarCandidato);
         menuInicio.add(menuItemActualizarCandidato);
+        menuInicio.add(menuItemEliminarCandidato);
 
-        // Menú Estadísticas
+  
         JMenu menuEstadisticas = new JMenu("Estadísticas");
         menuBar.add(menuEstadisticas);
 
@@ -62,6 +63,13 @@ public class MainGUI extends JFrame {
                 ActualizarCandidato ventanaActualizarCandidato = new ActualizarCandidato();
                 ventanaActualizarCandidato.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 ventanaActualizarCandidato.setVisible(true);
+            }
+        });
+
+        menuItemEliminarCandidato.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EliminarCandidato.eliminarCandidato(candidatos);
             }
         });
 
