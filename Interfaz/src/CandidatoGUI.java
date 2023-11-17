@@ -8,6 +8,8 @@ public class CandidatoGUI extends JFrame {
     private JTextField nombreField, cedulaField, votosField, propuestasField;
     private JComboBox<String> ciudadComboBox, posicionComboBox, partidoComboBox;
     public static ArrayList<Candidato> candidatos;
+    static int mas_votos = 0; 
+    static Candidato ganador = null;
 
     public CandidatoGUI(ArrayList<Candidato> candidatos) {
         super("Registro de Candidatos");
@@ -86,6 +88,15 @@ public class CandidatoGUI extends JFrame {
 
         Candidato candidato = new Candidato(nombre, cedula, ciudad, posicion, partido, votos, propuestas);
         candidatos.add(candidato);
+
+        candidatos.forEach((i)->{
+            int votosG;
+            votosG = i.getVotos();
+            if(votosG > mas_votos){
+                ganador = i;
+                mas_votos = votosG;
+            }
+        });
 
         nombreField.setText("");
         cedulaField.setText("");
