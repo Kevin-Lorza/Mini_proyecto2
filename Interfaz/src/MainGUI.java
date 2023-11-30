@@ -33,7 +33,12 @@ public class MainGUI extends JFrame {
         menuBar.add(menuEstadisticas);
 
         JMenuItem menuItemVerGanador = new JMenuItem("Ver Candidato Ganador");
+        JMenuItem menuItemCiudadConMasCandidatos = new JMenuItem("Ciudad con más candidatos");
+        JMenuItem menuItemTopTresCiudadesMenosCandidatos = new JMenuItem("Top 3 ciudades con menos candidatos");
+
         menuEstadisticas.add(menuItemVerGanador);
+        menuEstadisticas.add(menuItemCiudadConMasCandidatos);
+        menuEstadisticas.add(menuItemTopTresCiudadesMenosCandidatos);
 
         menuItemCrearCandidato.addActionListener(new ActionListener() {
             @Override
@@ -82,6 +87,20 @@ public class MainGUI extends JFrame {
             }
         });
 
+        menuItemCiudadConMasCandidatos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarCiudadConMasCandidatos();
+            }
+        });
+
+        menuItemTopTresCiudadesMenosCandidatos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarTopTresCiudadesMenosCandidatos();
+            }
+        });
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.setContentPane(new imagenFondo());
@@ -90,7 +109,19 @@ public class MainGUI extends JFrame {
         setVisible(true);
     }
 
+    private void mostrarCiudadConMasCandidatos() {
+        String ciudadMasCandidatos = Estadisticas.ciudadConMasCandidatos(candidatos);
+        JOptionPane.showMessageDialog(this, "La ciudad con más candidatos es: " + ciudadMasCandidatos);
+    }
 
+    private void mostrarTopTresCiudadesMenosCandidatos() {
+        java.util.List<String> ciudadesMenosCandidatos = Estadisticas.topTresCiudadesMenosCandidatos(candidatos);
+        String mensaje = "Top 3 ciudades con menos candidatos:\n";
+        for (int i = 0; i < ciudadesMenosCandidatos.size(); i++) {
+            mensaje += (i + 1) + ". " + ciudadesMenosCandidatos.get(i) + "\n";
+        }
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
